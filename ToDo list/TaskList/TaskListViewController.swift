@@ -30,6 +30,15 @@ class TaskListViewController: UIViewController {
       }
     }
   }
+  
+  // MARK: - Navigation
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    guard let taskDetailsVC = segue.destination as? TaskDetailsViewController else { return }
+    guard let indexPath = tableView.indexPathForSelectedRow else { return }
+    
+    let task = tasks[indexPath.row]
+    taskDetailsVC.task = task
+  }
 }
 
 // MARK: - UITableViewDataSource
@@ -46,6 +55,13 @@ extension TaskListViewController: UITableViewDataSource {
     cell.configure(withTask: task)
     
     return cell
+  }
+}
+
+// MARK: - UITableViewDelegate
+extension TaskListViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
   }
 }
 
