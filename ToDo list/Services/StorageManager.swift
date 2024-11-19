@@ -57,8 +57,11 @@ final class StorageManager {
     } catch let error {
       completion(.failure(error))
     }
-    
-    
+  }
+  
+  func delete(_ task: Task) {
+    viewContext.delete(task)
+    saveContext()
   }
   
   // MARK: - Core Data Saving support
