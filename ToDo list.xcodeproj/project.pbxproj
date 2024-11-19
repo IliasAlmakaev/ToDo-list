@@ -9,23 +9,35 @@
 /* Begin PBXBuildFile section */
 		286CD1AD2CEC904300EEC091 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CD1AC2CEC904300EEC091 /* AppDelegate.swift */; };
 		286CD1AF2CEC904300EEC091 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CD1AE2CEC904300EEC091 /* SceneDelegate.swift */; };
-		286CD1B12CEC904300EEC091 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CD1B02CEC904300EEC091 /* ViewController.swift */; };
+		286CD1B12CEC904300EEC091 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CD1B02CEC904300EEC091 /* TaskListViewController.swift */; };
 		286CD1B42CEC904300EEC091 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 286CD1B22CEC904300EEC091 /* Main.storyboard */; };
 		286CD1B72CEC904300EEC091 /* ToDo_list.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 286CD1B52CEC904300EEC091 /* ToDo_list.xcdatamodeld */; };
 		286CD1B92CEC904500EEC091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 286CD1B82CEC904500EEC091 /* Assets.xcassets */; };
 		286CD1BC2CEC904500EEC091 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 286CD1BA2CEC904500EEC091 /* LaunchScreen.storyboard */; };
+		286CD1CC2CEC938700EEC091 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CD1CB2CEC938700EEC091 /* StorageManager.swift */; };
+		286CD1CF2CEC945500EEC091 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CD1CE2CEC945500EEC091 /* TaskCell.swift */; };
+		286CD1D22CEC95A400EEC091 /* Extension + Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CD1D12CEC95A400EEC091 /* Extension + Date.swift */; };
+		286CD1D52CEC967A00EEC091 /* CreateTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CD1D42CEC967A00EEC091 /* CreateTaskViewController.swift */; };
+		286CD1D82CEC979300EEC091 /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CD1D72CEC979300EEC091 /* TaskDetailsViewController.swift */; };
+		286CD1DA2CEC986300EEC091 /* TaskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286CD1D92CEC986300EEC091 /* TaskStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		286CD1A92CEC904300EEC091 /* ToDo list.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDo list.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		286CD1AC2CEC904300EEC091 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		286CD1AE2CEC904300EEC091 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		286CD1B02CEC904300EEC091 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		286CD1B02CEC904300EEC091 /* TaskListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewController.swift; sourceTree = "<group>"; };
 		286CD1B32CEC904300EEC091 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		286CD1B62CEC904300EEC091 /* ToDo_list.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDo_list.xcdatamodel; sourceTree = "<group>"; };
 		286CD1B82CEC904500EEC091 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		286CD1BB2CEC904500EEC091 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		286CD1BD2CEC904500EEC091 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		286CD1CB2CEC938700EEC091 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		286CD1CE2CEC945500EEC091 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		286CD1D12CEC95A400EEC091 /* Extension + Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Date.swift"; sourceTree = "<group>"; };
+		286CD1D42CEC967A00EEC091 /* CreateTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewController.swift; sourceTree = "<group>"; };
+		286CD1D72CEC979300EEC091 /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
+		286CD1D92CEC986300EEC091 /* TaskStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +70,102 @@
 		286CD1AB2CEC904300EEC091 /* ToDo list */ = {
 			isa = PBXGroup;
 			children = (
-				286CD1AC2CEC904300EEC091 /* AppDelegate.swift */,
-				286CD1AE2CEC904300EEC091 /* SceneDelegate.swift */,
-				286CD1B02CEC904300EEC091 /* ViewController.swift */,
-				286CD1B22CEC904300EEC091 /* Main.storyboard */,
-				286CD1B82CEC904500EEC091 /* Assets.xcassets */,
-				286CD1BA2CEC904500EEC091 /* LaunchScreen.storyboard */,
-				286CD1BD2CEC904500EEC091 /* Info.plist */,
-				286CD1B52CEC904300EEC091 /* ToDo_list.xcdatamodeld */,
+				286CD1C92CEC92FF00EEC091 /* TaskList */,
+				286CD1D32CEC966100EEC091 /* CreateTask */,
+				286CD1D62CEC977A00EEC091 /* TaskDetails */,
+				286CD1C72CEC924500EEC091 /* Storyboard */,
+				286CD1CA2CEC935A00EEC091 /* Services */,
+				286CD1D02CEC958400EEC091 /* Extensions */,
+				286CD1C52CEC922B00EEC091 /* Models */,
+				286CD1C62CEC923400EEC091 /* Resources */,
+				286CD1C42CEC921900EEC091 /* Supporting Files */,
 			);
 			path = "ToDo list";
+			sourceTree = "<group>";
+		};
+		286CD1C42CEC921900EEC091 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				286CD1AC2CEC904300EEC091 /* AppDelegate.swift */,
+				286CD1AE2CEC904300EEC091 /* SceneDelegate.swift */,
+				286CD1BD2CEC904500EEC091 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		286CD1C52CEC922B00EEC091 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				286CD1B52CEC904300EEC091 /* ToDo_list.xcdatamodeld */,
+				286CD1D92CEC986300EEC091 /* TaskStatus.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		286CD1C62CEC923400EEC091 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				286CD1B82CEC904500EEC091 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		286CD1C72CEC924500EEC091 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				286CD1B22CEC904300EEC091 /* Main.storyboard */,
+				286CD1BA2CEC904500EEC091 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		286CD1C92CEC92FF00EEC091 /* TaskList */ = {
+			isa = PBXGroup;
+			children = (
+				286CD1CD2CEC944200EEC091 /* TaskCell */,
+				286CD1B02CEC904300EEC091 /* TaskListViewController.swift */,
+			);
+			path = TaskList;
+			sourceTree = "<group>";
+		};
+		286CD1CA2CEC935A00EEC091 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				286CD1CB2CEC938700EEC091 /* StorageManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		286CD1CD2CEC944200EEC091 /* TaskCell */ = {
+			isa = PBXGroup;
+			children = (
+				286CD1CE2CEC945500EEC091 /* TaskCell.swift */,
+			);
+			path = TaskCell;
+			sourceTree = "<group>";
+		};
+		286CD1D02CEC958400EEC091 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				286CD1D12CEC95A400EEC091 /* Extension + Date.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		286CD1D32CEC966100EEC091 /* CreateTask */ = {
+			isa = PBXGroup;
+			children = (
+				286CD1D42CEC967A00EEC091 /* CreateTaskViewController.swift */,
+			);
+			path = CreateTask;
+			sourceTree = "<group>";
+		};
+		286CD1D62CEC977A00EEC091 /* TaskDetails */ = {
+			isa = PBXGroup;
+			children = (
+				286CD1D72CEC979300EEC091 /* TaskDetailsViewController.swift */,
+			);
+			path = TaskDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,10 +239,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				286CD1B12CEC904300EEC091 /* ViewController.swift in Sources */,
+				286CD1D22CEC95A400EEC091 /* Extension + Date.swift in Sources */,
+				286CD1B12CEC904300EEC091 /* TaskListViewController.swift in Sources */,
 				286CD1AD2CEC904300EEC091 /* AppDelegate.swift in Sources */,
+				286CD1CC2CEC938700EEC091 /* StorageManager.swift in Sources */,
+				286CD1D82CEC979300EEC091 /* TaskDetailsViewController.swift in Sources */,
 				286CD1AF2CEC904300EEC091 /* SceneDelegate.swift in Sources */,
+				286CD1CF2CEC945500EEC091 /* TaskCell.swift in Sources */,
 				286CD1B72CEC904300EEC091 /* ToDo_list.xcdatamodeld in Sources */,
+				286CD1DA2CEC986300EEC091 /* TaskStatus.swift in Sources */,
+				286CD1D52CEC967A00EEC091 /* CreateTaskViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +398,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ToDo list/Info.plist";
+				INFOPLIST_FILE = "ToDo list/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -322,7 +426,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "ToDo list/Info.plist";
+				INFOPLIST_FILE = "ToDo list/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
