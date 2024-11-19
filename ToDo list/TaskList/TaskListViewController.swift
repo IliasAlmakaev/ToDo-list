@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CreateTaskViewControllerDelegate: AnyObject {
+  func addTask(_ task: Task)
+}
+
 class TaskListViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
@@ -20,7 +24,7 @@ class TaskListViewController: UIViewController {
     fetchData()
   }
   
-  private func fetchData() {
+  internal func fetchData() {
     storageManager.fetchData { [unowned self] result in
       switch result {
       case .success(let tasks):
@@ -33,11 +37,16 @@ class TaskListViewController: UIViewController {
   
   // MARK: - Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let taskDetailsVC = segue.destination as? TaskDetailsViewController else { return }
-    guard let indexPath = tableView.indexPathForSelectedRow else { return }
-    
-    let task = tasks[indexPath.row]
-    taskDetailsVC.task = task
+    if segue.identifier == "TaskDetails" {
+      guard let taskDetailsVC = segue.destination as? TaskDetailsViewController else { return }
+      guard let indexPath = tableView.indexPathForSelectedRow else { return }
+      
+      let task = tasks[indexPath.row]
+      taskDetailsVC.task = task
+    } else {
+      guard let createTaskVC = segue.destination as? CreateTaskViewController else { return }
+      createTaskVC.delegate = self
+    }
   }
 }
 
@@ -62,6 +71,13 @@ extension TaskListViewController: UITableViewDataSource {
 extension TaskListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+  }
+}
+
+extension TaskListViewController: CreateTaskViewControllerDelegate {
+  func addTask(_ task: Task) {
+    tasks.append(task)
+    tableView.reloadData()
   }
 }
 

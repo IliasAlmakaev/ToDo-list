@@ -14,6 +14,8 @@ final class CreateTaskViewController: UIViewController {
   
   @IBOutlet weak var saveButton: UIBarButtonItem!
   
+  var delegate: CreateTaskViewControllerDelegate?
+  
   private let storageManager = StorageManager.shared
   
   override func viewDidLoad() {
@@ -29,8 +31,9 @@ final class CreateTaskViewController: UIViewController {
       withBriefDescription: breifDescription,
       fullDescription: fullDescription,
       status: TaskStatus.new.rawValue,
-      AndDate: Date.now
-    )
+      AndDate: Date.now) { [unowned self] task in
+        delegate?.addTask(task)
+      }
     
     navigationController?.popViewController(animated: true)
   }

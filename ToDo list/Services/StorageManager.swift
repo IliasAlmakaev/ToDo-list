@@ -34,7 +34,8 @@ final class StorageManager {
     withBriefDescription briefDescription: String,
     fullDescription: String,
     status: String,
-    AndDate date: Date
+    AndDate date: Date,
+    completion: @escaping (Task) -> Void
   ) {
     
     let task = Task(context: viewContext)
@@ -43,6 +44,7 @@ final class StorageManager {
     task.fullDescription = fullDescription
     task.status = status
     task.creationDate = date
+    completion(task)
     saveContext()
   }
   
