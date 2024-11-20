@@ -64,7 +64,7 @@ class TaskListViewController: UIViewController {
   private func deleteTask(withIndexPath indexPath: IndexPath) {
     let task = rows.remove(at: indexPath.row).task
     tableView.deleteRows(at: [indexPath], with: .automatic)
-    let request = TaskList.ShowTasks.Request(task: task)
+    let request = TaskList.DeleteTask.Request(task: task)
     
     interactor?.deleteTask(request: request)
   }
@@ -77,7 +77,8 @@ extension TaskListViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cellViewModel = rows[indexPath.row]
+    var cellViewModel = rows[indexPath.row]
+    cellViewModel.delegate = self
     let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.identifier, for: indexPath)
     guard let cell = cell as? TaskCell else { return UITableViewCell() }
     cell.viewModel = cellViewModel
@@ -119,6 +120,7 @@ extension TaskListViewController: TaskCellDelegate {
   func showMenu(withTask task: Task, andCell cell: TaskCell) {
     guard let indexPath = tableView.indexPath(for: cell) else { return }
     
+    
     let status = TaskStatus(rawValue: task.status ?? "Новая")
     let alert = UIAlertController(title: "Задача", message: task.briefDescription, preferredStyle: .actionSheet)
     let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
@@ -126,7 +128,8 @@ extension TaskListViewController: TaskCellDelegate {
     switch status {
     case .new:
       let addToWorkAction = UIAlertAction(title: "Взять в работу", style: .default) { [unowned self] _ in
-        storageManager.changeStatus(task, newStatus: TaskStatus.atWork.rawValue)
+        let request = TaskList.ChangeStatus.Request(task: task, status: TaskStatus.atWork.rawValue)
+        interactor?.changeStatus(request: request)
         tableView.reloadRows(at: [indexPath], with: .automatic)
       }
       
@@ -139,7 +142,8 @@ extension TaskListViewController: TaskCellDelegate {
       alert.addAction(cancelAction)
     case .atWork:
       let doneAction = UIAlertAction(title: "Выполнена", style: .default) { [unowned self] _ in
-        storageManager.changeStatus(task, newStatus: TaskStatus.done.rawValue)
+        let request = TaskList.ChangeStatus.Request(task: task, status: TaskStatus.done.rawValue)
+        interactor?.changeStatus(request: request)
         tableView.reloadRows(at: [indexPath], with: .automatic)
       }
       

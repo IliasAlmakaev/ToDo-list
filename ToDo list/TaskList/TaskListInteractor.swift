@@ -9,7 +9,8 @@ import Foundation
 
 protocol TaskListBusinessLogic {
   func fetchTasks()
-  func deleteTask(request: TaskList.ShowTasks.Request)
+  func deleteTask(request: TaskList.DeleteTask.Request)
+  func changeStatus(request: TaskList.ChangeStatus.Request)
 }
 
 protocol TaskListDataStore {
@@ -35,7 +36,11 @@ final class TaskListInteractor: TaskListBusinessLogic, TaskListDataStore {
     }
   }
   
-  func deleteTask(request: TaskList.ShowTasks.Request) {
+  func deleteTask(request: TaskList.DeleteTask.Request) {
     storageManager.delete(request.task)
+  }
+  
+  func changeStatus(request: TaskList.ChangeStatus.Request) {
+    storageManager.changeStatus(request.task, newStatus: request.status)
   }
 }

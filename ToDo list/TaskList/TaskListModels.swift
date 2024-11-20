@@ -23,7 +23,7 @@ protocol TaskCellViewModelProtocol {
   var creationDate: String { get }
   var isNotDoneStatus: Bool { get }
   var task: Task { get }
-  var delegate: TaskCellDelegate? { get }
+  var delegate: TaskCellDelegate? { get set }
   init(task: Task)
 }
 
@@ -31,10 +31,6 @@ enum TaskList {
   
   // MARK: - User cases
   enum ShowTasks {
-    
-    struct Request {
-      let task: Task
-    }
     
     struct Response {
       let tasks: [Task]
@@ -75,6 +71,19 @@ enum TaskList {
         }
       }
       let rows: [TaskCellViewModelProtocol]
+    }
+  }
+  
+  enum DeleteTask {
+    struct Request {
+      let task: Task
+    }
+  }
+  
+  enum ChangeStatus {
+    struct Request {
+      let task: Task
+      let status: String
     }
   }
 }

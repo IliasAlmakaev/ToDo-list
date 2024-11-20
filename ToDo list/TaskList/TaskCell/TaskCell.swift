@@ -26,7 +26,6 @@ final class TaskCell: UITableViewCell, CellModelRepresentable {
   }
   
   weak var delegate: TaskCellDelegate?
-  var task: Task!
   
   private func updateView() {
     guard let viewModel = viewModel as? TaskCellViewModel else { return }
@@ -39,18 +38,8 @@ final class TaskCell: UITableViewCell, CellModelRepresentable {
     delegate = viewModel.delegate
   }
   
-  func configure(withTask task: Task) {
-    self.task = task
-    
-    briefDescriptionLabel.text = task.briefDescription
-    statusLabel.text = "Статус: \(task.status ?? "")"
-    dateLabel.text = task.creationDate?.currentDate
-    
-    menuButton.isEnabled = task.status != TaskStatus.done.rawValue
-  }
-  
   @IBAction func menuButtonPressed() {
-    delegate?.showMenu(withTask: task, andCell: self)
+    delegate?.showMenu(withTask: viewModel?.task ?? Task(), andCell: self)
   }
   
 }
