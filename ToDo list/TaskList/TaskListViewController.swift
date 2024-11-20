@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TaskListDisplayLogic: AnyObject {
+  func displayTasks(viewModel: TaskList.ShowTasks.ViewModel)
+}
+
 protocol CreateTaskViewControllerDelegate: AnyObject {
   func addTask(_ task: Task)
 }
@@ -19,55 +23,56 @@ class TaskListViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
   
+  var interactor: TaskListBusinessLogic?
+  var router: (NSObjectProtocol & TaskListRoutingLogic & TaskListDataPassing)?
+  
   private var tasks: [Task] = []
   private let storageManager = StorageManager.shared
+  private var rows: [TaskCellViewModelProtocol] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.rowHeight = 110
-    fetchData()
+    TaskListConfigurator.shared.configure(with: self)
+    showTasks()
   }
   
-  private func fetchData() {
-    storageManager.fetchData { [unowned self] result in
-      switch result {
-      case .success(let tasks):
-        self.tasks = tasks
-      case .failure(let error):
-        print(error.localizedDescription)
+  // MARK: - Routing
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let scene = segue.identifier {
+      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+      if let router = router, router.responds(to: selector) {
+        router.perform(selector, with: segue)
       }
     }
+    
+//    if segue.identifier == "TaskDetails" {
+//      guard let taskDetailsVC = segue.destination as? TaskDetailsViewController else { return }
+//      guard let indexPath = tableView.indexPathForSelectedRow else { return }
+//
+//      let task = tasks[indexPath.row]
+//      taskDetailsVC.task = task
+//    } else {
+//      guard let createTaskVC = segue.destination as? CreateTaskViewController else { return }
+//      createTaskVC.delegate = self
+//    }
   }
   
-  // MARK: - Navigation
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "TaskDetails" {
-      guard let taskDetailsVC = segue.destination as? TaskDetailsViewController else { return }
-      guard let indexPath = tableView.indexPathForSelectedRow else { return }
-      
-      let task = tasks[indexPath.row]
-      taskDetailsVC.task = task
-    } else {
-      guard let createTaskVC = segue.destination as? CreateTaskViewController else { return }
-      createTaskVC.delegate = self
-    }
+  private func showTasks() {
+    interactor?.fetchTasks()
   }
 }
 
 // MARK: - UITableViewDataSource
 extension TaskListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    tasks.count
+    rows.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
+    let cellViewModel = rows[indexPath.row]
+    let cell = tableView.dequeueReusableCell(withIdentifier: cellViewModel.identifier, for: indexPath)
     guard let cell = cell as? TaskCell else { return UITableViewCell() }
-    
-    let task = tasks[indexPath.row]
-    cell.delegate = self
-    cell.configure(withTask: task)
-    
+    cell.viewModel = cellViewModel
     return cell
   }
 }
@@ -76,6 +81,10 @@ extension TaskListViewController: UITableViewDataSource {
 extension TaskListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    rows[indexPath.row].height
   }
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -133,6 +142,14 @@ extension TaskListViewController: TaskCellDelegate {
     }
     
     present(alert, animated: true, completion: nil)
+  }
+}
+
+// MARK: - TaskListDisplayLogic
+extension TaskListViewController: TaskListDisplayLogic {
+  func displayTasks(viewModel: TaskList.ShowTasks.ViewModel) {
+    rows = viewModel.rows
+    tableView.reloadData()
   }
 }
 

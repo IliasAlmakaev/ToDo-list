@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class TaskCell: UITableViewCell {
+protocol CellModelRepresentable {
+  var viewModel: TaskCellViewModelProtocol? { get }
+}
+
+final class TaskCell: UITableViewCell, CellModelRepresentable {
 
   @IBOutlet weak var briefDescriptionLabel: UILabel!
   @IBOutlet weak var statusLabel: UILabel!
@@ -15,8 +19,25 @@ final class TaskCell: UITableViewCell {
   
   @IBOutlet weak var menuButton: UIButton!
   
+  var viewModel: TaskCellViewModelProtocol? {
+    didSet {
+      updateView()
+    }
+  }
+  
   weak var delegate: TaskCellDelegate?
   var task: Task!
+  
+  private func updateView() {
+    guard let viewModel = viewModel as? TaskCellViewModel else { return }
+
+    briefDescriptionLabel.text = viewModel.briefDescription
+    statusLabel.text = viewModel.status
+    dateLabel.text = viewModel.creationDate
+    
+    menuButton.isEnabled = viewModel.isNotDoneStatus
+    delegate = viewModel.delegate
+  }
   
   func configure(withTask task: Task) {
     self.task = task
