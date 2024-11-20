@@ -28,7 +28,7 @@ class TaskListViewController: UIViewController {
     fetchData()
   }
   
-  internal func fetchData() {
+  private func fetchData() {
     storageManager.fetchData { [unowned self] result in
       switch result {
       case .success(let tasks):
