@@ -32,6 +32,10 @@ enum TaskList {
   // MARK: - User cases
   enum ShowTasks {
     
+    struct Request {
+      let task: Task
+    }
+    
     struct Response {
       let tasks: [Task]
     }

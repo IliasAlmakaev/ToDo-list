@@ -9,6 +9,7 @@ import Foundation
 
 protocol TaskListBusinessLogic {
   func fetchTasks()
+  func deleteTask(request: TaskList.ShowTasks.Request)
 }
 
 protocol TaskListDataStore {
@@ -19,6 +20,7 @@ final class TaskListInteractor: TaskListBusinessLogic, TaskListDataStore {
   
   var presenter: TaskListPresentaionLogic?
   var tasks: [Task] = []
+  private let storageManager = StorageManager.shared
   
   func fetchTasks() {
     StorageManager.shared.fetchData { [weak self] result in
@@ -31,5 +33,9 @@ final class TaskListInteractor: TaskListBusinessLogic, TaskListDataStore {
         print(error)
       }
     }
+  }
+  
+  func deleteTask(request: TaskList.ShowTasks.Request) {
+    storageManager.delete(request.task)
   }
 }

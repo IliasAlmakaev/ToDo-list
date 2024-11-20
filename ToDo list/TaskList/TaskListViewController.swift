@@ -60,6 +60,14 @@ class TaskListViewController: UIViewController {
   private func showTasks() {
     interactor?.fetchTasks()
   }
+  
+  private func deleteTask(withIndexPath indexPath: IndexPath) {
+    let task = rows.remove(at: indexPath.row).task
+    tableView.deleteRows(at: [indexPath], with: .automatic)
+    let request = TaskList.ShowTasks.Request(task: task)
+    
+    interactor?.deleteTask(request: request)
+  }
 }
 
 // MARK: - UITableViewDataSource
@@ -89,10 +97,12 @@ extension TaskListViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      let task = tasks.remove(at: indexPath.row)
-      tableView.deleteRows(at: [indexPath], with: .automatic)
-      storageManager.delete(task)
+      deleteTask(withIndexPath: indexPath)
     }
+  }
+  
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    rows[indexPath.row].isNotDoneStatus
   }
 }
 
@@ -121,9 +131,7 @@ extension TaskListViewController: TaskCellDelegate {
       }
       
       let deleteTaskAction = UIAlertAction(title: "Удалить", style: .destructive) { [unowned self] _ in
-        let task = tasks.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-        storageManager.delete(task)
+        deleteTask(withIndexPath: indexPath)
       }
       
       alert.addAction(addToWorkAction)
