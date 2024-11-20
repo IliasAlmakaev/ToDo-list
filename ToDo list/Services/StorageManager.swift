@@ -48,6 +48,11 @@ final class StorageManager {
     saveContext()
   }
   
+  func changeStatus(_ task: Task, newStatus: String) {
+    task.status = newStatus
+    saveContext()
+  }
+  
   func fetchData(completion: (Result<[Task], Error>) -> Void) {
     let fetchRequest = Task.fetchRequest()
     

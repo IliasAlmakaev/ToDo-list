@@ -11,6 +11,10 @@ protocol CreateTaskViewControllerDelegate: AnyObject {
   func addTask(_ task: Task)
 }
 
+protocol TaskCellDelegate: AnyObject {
+  func showMenu(withTask task: Task, andCell: TaskCell)
+}
+
 class TaskListViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
@@ -61,6 +65,7 @@ extension TaskListViewController: UITableViewDataSource {
     guard let cell = cell as? TaskCell else { return UITableViewCell() }
     
     let task = tasks[indexPath.row]
+    cell.delegate = self
     cell.configure(withTask: task)
     
     return cell
@@ -82,10 +87,52 @@ extension TaskListViewController: UITableViewDelegate {
   }
 }
 
+// MARK: - CreateTaskViewControllerDelegate
 extension TaskListViewController: CreateTaskViewControllerDelegate {
   func addTask(_ task: Task) {
     tasks.append(task)
     tableView.reloadData()
+  }
+}
+
+// MARK: - TaskCellDelegate
+extension TaskListViewController: TaskCellDelegate {
+  func showMenu(withTask task: Task, andCell cell: TaskCell) {
+    guard let indexPath = tableView.indexPath(for: cell) else { return }
+    
+    let status = TaskStatus(rawValue: task.status ?? "Новая")
+    let alert = UIAlertController(title: "Задача", message: task.briefDescription, preferredStyle: .actionSheet)
+    let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+    
+    switch status {
+    case .new:
+      let addToWorkAction = UIAlertAction(title: "Взять в работу", style: .default) { [unowned self] _ in
+        storageManager.changeStatus(task, newStatus: TaskStatus.atWork.rawValue)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+      }
+      
+      let deleteTaskAction = UIAlertAction(title: "Удалить", style: .destructive) { [unowned self] _ in
+        let task = tasks.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        storageManager.delete(task)
+      }
+      
+      alert.addAction(addToWorkAction)
+      alert.addAction(deleteTaskAction)
+      alert.addAction(cancelAction)
+    case .atWork:
+      let doneAction = UIAlertAction(title: "Выполнена", style: .default) { [unowned self] _ in
+        storageManager.changeStatus(task, newStatus: TaskStatus.done.rawValue)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+      }
+      
+      alert.addAction(doneAction)
+      alert.addAction(cancelAction)
+    default:
+      break
+    }
+    
+    present(alert, animated: true, completion: nil)
   }
 }
 

@@ -23,6 +23,11 @@ final class CreateTaskViewController: UIViewController {
     setupUI()
   }
   
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    view.endEditing(true)
+  }
+  
   @IBAction func saveButtonPressed(_ sender: Any) {
     guard let breifDescription = breifDescriptionTF.text,
           let fullDescription = fullDescriptionTF.text else { return }
