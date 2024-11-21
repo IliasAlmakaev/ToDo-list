@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CreateTaskDisplayLogic: AnyObject {
+  func backToTaskList()
+}
+
 final class CreateTaskViewController: UIViewController {
   
   @IBOutlet weak var breifDescriptionTF: UITextField!
@@ -14,9 +18,23 @@ final class CreateTaskViewController: UIViewController {
   
   @IBOutlet weak var saveButton: UIBarButtonItem!
   
+  var interactor: CreateTaskBusinessLogic?
+  var router: (NSObjectProtocol & CreateTaskRoutingLogic & CreateTaskDataPassing)?
+  
   var delegate: CreateTaskViewControllerDelegate?
   
   private let storageManager = StorageManager.shared
+  
+  // MARK: - Object lifecycle
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    CreateTaskConfigurator.shared.configure(with: self)
+  }
+  
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    CreateTaskConfigurator.shared.configure(with: self)
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -32,15 +50,14 @@ final class CreateTaskViewController: UIViewController {
     guard let breifDescription = breifDescriptionTF.text,
           let fullDescription = fullDescriptionTF.text else { return }
     
-    storageManager.create(
-      withBriefDescription: breifDescription,
+    let request = CreateTask.Request(
+      briefDescription: breifDescription,
       fullDescription: fullDescription,
       status: TaskStatus.new.rawValue,
-      AndDate: Date.now) { [unowned self] task in
-        delegate?.addTask(task)
-      }
+      creationDate: Date.now
+    )
     
-    navigationController?.popViewController(animated: true)
+    interactor?.createTask(request: request)
   }
   
   private func setupUI() {
@@ -55,5 +72,12 @@ final class CreateTaskViewController: UIViewController {
     
     breifDescriptionTF.addAction(textFieldAction, for: .editingChanged)
     fullDescriptionTF.addAction(textFieldAction, for: .editingChanged)
+  }
+}
+
+// MARK: - CreateTaskDisplayLogic
+extension CreateTaskViewController: CreateTaskDisplayLogic {
+  func backToTaskList() {
+    router?.backToTaskList()
   }
 }

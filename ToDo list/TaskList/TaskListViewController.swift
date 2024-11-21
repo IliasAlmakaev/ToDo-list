@@ -9,6 +9,7 @@ import UIKit
 
 protocol TaskListDisplayLogic: AnyObject {
   func displayTasks(viewModel: TaskList.ShowTasks.ViewModel)
+  func displayTask(viewModel: TaskList.ShowTask.ViewModel)
 }
 
 protocol CreateTaskViewControllerDelegate: AnyObject {
@@ -107,14 +108,6 @@ extension TaskListViewController: UITableViewDelegate {
   }
 }
 
-// MARK: - CreateTaskViewControllerDelegate
-extension TaskListViewController: CreateTaskViewControllerDelegate {
-  func addTask(_ task: Task) {
-    tasks.append(task)
-    tableView.reloadData()
-  }
-}
-
 // MARK: - TaskCellDelegate
 extension TaskListViewController: TaskCellDelegate {
   func showMenu(withTask task: Task, andCell cell: TaskCell) {
@@ -157,10 +150,23 @@ extension TaskListViewController: TaskCellDelegate {
   }
 }
 
+// MARK: - CreateTaskViewControllerDelegate
+extension TaskListViewController: CreateTaskViewControllerDelegate {
+  func addTask(_ task: Task) {
+    let request = TaskList.ShowTask.Request(task: task)
+    interactor?.presentTask(request: request)
+  }
+}
+
 // MARK: - TaskListDisplayLogic
 extension TaskListViewController: TaskListDisplayLogic {
   func displayTasks(viewModel: TaskList.ShowTasks.ViewModel) {
     rows = viewModel.rows
+    tableView.reloadData()
+  }
+  
+  func displayTask(viewModel: TaskList.ShowTask.ViewModel) {
+    rows.append(viewModel.taskCell)
     tableView.reloadData()
   }
 }

@@ -11,20 +11,23 @@ protocol TaskListBusinessLogic {
   func fetchTasks()
   func deleteTask(request: TaskList.DeleteTask.Request)
   func changeStatus(request: TaskList.ChangeStatus.Request)
+  func presentTask(request: TaskList.ShowTask.Request)
 }
 
 protocol TaskListDataStore {
   var tasks: [Task] { get }
+  var task: Task? { get set }
 }
 
 final class TaskListInteractor: TaskListBusinessLogic, TaskListDataStore {
   
   var presenter: TaskListPresentaionLogic?
   var tasks: [Task] = []
+  var task: Task?
   private let storageManager = StorageManager.shared
   
   func fetchTasks() {
-    StorageManager.shared.fetchData { [weak self] result in
+    storageManager.fetchData { [weak self] result in
       switch result {
       case .success(let tasks):
         self?.tasks = tasks
@@ -43,4 +46,10 @@ final class TaskListInteractor: TaskListBusinessLogic, TaskListDataStore {
   func changeStatus(request: TaskList.ChangeStatus.Request) {
     storageManager.changeStatus(request.task, newStatus: request.status)
   }
+  
+  func presentTask(request: TaskList.ShowTask.Request) {
+    let response = TaskList.ShowTask.Response(task: task)
+    presenter?.presentTask(response: response)
+  }
 }
+

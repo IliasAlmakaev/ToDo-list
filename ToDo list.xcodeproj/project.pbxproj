@@ -29,6 +29,11 @@
 		28D9529E2CEDB99A00239D2D /* TaskListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D9529D2CEDB99A00239D2D /* TaskListRouter.swift */; };
 		28D952A02CEDB9BF00239D2D /* TaskListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D9529F2CEDB9BF00239D2D /* TaskListModels.swift */; };
 		28D952A22CEDBA2400239D2D /* TaskListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D952A12CEDBA2400239D2D /* TaskListConfigurator.swift */; };
+		28D952A42CEE13FC00239D2D /* CreateTaskInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D952A32CEE13FC00239D2D /* CreateTaskInteractor.swift */; };
+		28D952A62CEE144100239D2D /* CreateTaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D952A52CEE144100239D2D /* CreateTaskPresenter.swift */; };
+		28D952A82CEE145300239D2D /* CreateTaskRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D952A72CEE145300239D2D /* CreateTaskRouter.swift */; };
+		28D952AA2CEE146A00239D2D /* CreateTaskModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D952A92CEE146A00239D2D /* CreateTaskModels.swift */; };
+		28D952AC2CEE147A00239D2D /* CreateTaskConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D952AB2CEE147A00239D2D /* CreateTaskConfigurator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +61,11 @@
 		28D9529D2CEDB99A00239D2D /* TaskListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRouter.swift; sourceTree = "<group>"; };
 		28D9529F2CEDB9BF00239D2D /* TaskListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListModels.swift; sourceTree = "<group>"; };
 		28D952A12CEDBA2400239D2D /* TaskListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListConfigurator.swift; sourceTree = "<group>"; };
+		28D952A32CEE13FC00239D2D /* CreateTaskInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskInteractor.swift; sourceTree = "<group>"; };
+		28D952A52CEE144100239D2D /* CreateTaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskPresenter.swift; sourceTree = "<group>"; };
+		28D952A72CEE145300239D2D /* CreateTaskRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskRouter.swift; sourceTree = "<group>"; };
+		28D952A92CEE146A00239D2D /* CreateTaskModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskModels.swift; sourceTree = "<group>"; };
+		28D952AB2CEE147A00239D2D /* CreateTaskConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskConfigurator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +188,11 @@
 			isa = PBXGroup;
 			children = (
 				286CD1D42CEC967A00EEC091 /* CreateTaskViewController.swift */,
+				28D952A32CEE13FC00239D2D /* CreateTaskInteractor.swift */,
+				28D952A52CEE144100239D2D /* CreateTaskPresenter.swift */,
+				28D952A72CEE145300239D2D /* CreateTaskRouter.swift */,
+				28D952A92CEE146A00239D2D /* CreateTaskModels.swift */,
+				28D952AB2CEE147A00239D2D /* CreateTaskConfigurator.swift */,
 			);
 			path = CreateTask;
 			sourceTree = "<group>";
@@ -267,8 +282,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				286CD1D22CEC95A400EEC091 /* Extension + Date.swift in Sources */,
+				28D952AC2CEE147A00239D2D /* CreateTaskConfigurator.swift in Sources */,
 				286CD1B12CEC904300EEC091 /* TaskListViewController.swift in Sources */,
 				28D952962CEDA19400239D2D /* TaskDetailsConfigurator.swift in Sources */,
+				28D952AA2CEE146A00239D2D /* CreateTaskModels.swift in Sources */,
+				28D952A42CEE13FC00239D2D /* CreateTaskInteractor.swift in Sources */,
 				286CD1AD2CEC904300EEC091 /* AppDelegate.swift in Sources */,
 				28D952942CEDA16600239D2D /* TaskDetailsModels.swift in Sources */,
 				286CD1CC2CEC938700EEC091 /* StorageManager.swift in Sources */,
@@ -276,9 +294,11 @@
 				28D9528E2CEDA0C800239D2D /* TaskDetailsInteractor.swift in Sources */,
 				286CD1AF2CEC904300EEC091 /* SceneDelegate.swift in Sources */,
 				286CD1CF2CEC945500EEC091 /* TaskCell.swift in Sources */,
+				28D952A62CEE144100239D2D /* CreateTaskPresenter.swift in Sources */,
 				286CD1B72CEC904300EEC091 /* ToDo_list.xcdatamodeld in Sources */,
 				28D952A22CEDBA2400239D2D /* TaskListConfigurator.swift in Sources */,
 				28D952982CEDAB1B00239D2D /* TaskDetailsRouter.swift in Sources */,
+				28D952A82CEE145300239D2D /* CreateTaskRouter.swift in Sources */,
 				28D952A02CEDB9BF00239D2D /* TaskListModels.swift in Sources */,
 				28D9529E2CEDB99A00239D2D /* TaskListRouter.swift in Sources */,
 				28D9529A2CEDB95600239D2D /* TaskListInteractor.swift in Sources */,

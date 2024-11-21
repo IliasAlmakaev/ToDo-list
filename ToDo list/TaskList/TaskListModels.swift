@@ -70,6 +70,7 @@ enum TaskList {
           self.task = task
         }
       }
+      
       let rows: [TaskCellViewModelProtocol]
     }
   }
@@ -84,6 +85,54 @@ enum TaskList {
     struct Request {
       let task: Task
       let status: String
+    }
+  }
+  
+  enum ShowTask {
+    struct Request {
+      let task: Task?
+    }
+    
+    struct Response {
+      let task: Task?
+    }
+    
+    struct ViewModel {
+      struct TaskCellViewModel: TaskCellViewModelProtocol {
+        var identifier: String {
+          "TaskCell"
+        }
+        
+        var height: Double {
+          110
+        }
+        
+        var briefDescription: String {
+          task.briefDescription ?? ""
+        }
+        
+        var status: String {
+          "Статус: \(task.status ?? "")"
+        }
+        
+        var creationDate: String {
+          task.creationDate?.currentDate ?? ""
+        }
+        
+        var isNotDoneStatus: Bool {
+          task.status != TaskStatus.done.rawValue
+        }
+        
+        var task: Task
+        
+        weak var delegate: TaskCellDelegate?
+        
+        init(task: Task) {
+          self.task = task
+        }
+      }
+      
+      var taskCell: TaskCellViewModelProtocol
     }
   }
 }

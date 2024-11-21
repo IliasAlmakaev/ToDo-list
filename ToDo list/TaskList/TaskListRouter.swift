@@ -10,6 +10,7 @@ import UIKit
 
 @objc protocol TaskListRoutingLogic {
   func routeToTaskDetails(segue: UIStoryboardSegue?)
+  func routeToCreateTask(segue: UIStoryboardSegue?)
 }
 
 protocol TaskListDataPassing {
@@ -39,6 +40,14 @@ final class TaskListRouter: NSObject, TaskListRoutingLogic, TaskListDataPassing 
     }
   }
   
+  func routeToCreateTask(segue: UIStoryboardSegue?) {
+    if let segue = segue {
+      guard let destinationVC = segue.destination as? CreateTaskViewController else { return }
+      guard var destinationDS = destinationVC.router?.dataStore else { return }
+      passDataToCreateTask(destination: &destinationDS)
+    }
+  }
+  
   // MARK: - Navigation
   func navigateToTaskDetails(source: TaskListViewController, destination: TaskDetailsViewController) {
     source.show(destination, sender: nil)
@@ -48,5 +57,9 @@ final class TaskListRouter: NSObject, TaskListRoutingLogic, TaskListDataPassing 
   func passDataToTaskDetails(source: TaskListDataStore, destination: inout TaskDetailsDataStore) {
     guard let indexPath = viewController?.tableView.indexPathForSelectedRow else { return }
     destination.task = source.tasks[indexPath.row]
+  }
+  
+  func passDataToCreateTask(destination: inout CreateTaskDataStore) {
+    destination.delegate = viewController
   }
 }
