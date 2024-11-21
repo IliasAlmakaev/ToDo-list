@@ -41,5 +41,4 @@ final class TaskCell: UITableViewCell, CellModelRepresentable {
   @IBAction func menuButtonPressed() {
     delegate?.showMenu(withTask: viewModel?.task ?? Task(), andCell: self)
   }
-  
 }

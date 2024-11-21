@@ -18,7 +18,6 @@ final class TaskDetailsViewController: UIViewController {
   @IBOutlet weak var statusLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
   
-  var task: Task!
   var interactor: TaskDetailsBusinessLogic?
   var router: (NSObjectProtocol & TaskDetailsRoutingLogic & TaskDetailsDataPassing)?
   

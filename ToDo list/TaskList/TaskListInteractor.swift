@@ -48,7 +48,8 @@ final class TaskListInteractor: TaskListBusinessLogic, TaskListDataStore {
   }
   
   func presentTask(request: TaskList.ShowTask.Request) {
-    let response = TaskList.ShowTask.Response(task: task)
+    tasks.append(request.task)
+    let response = TaskList.ShowTask.Response(task: request.task)
     presenter?.presentTask(response: response)
   }
 }

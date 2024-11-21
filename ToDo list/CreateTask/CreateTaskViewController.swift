@@ -23,8 +23,6 @@ final class CreateTaskViewController: UIViewController {
   
   var delegate: CreateTaskViewControllerDelegate?
   
-  private let storageManager = StorageManager.shared
-  
   // MARK: - Object lifecycle
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

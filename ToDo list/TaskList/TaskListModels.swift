@@ -90,11 +90,11 @@ enum TaskList {
   
   enum ShowTask {
     struct Request {
-      let task: Task?
+      let task: Task
     }
     
     struct Response {
-      let task: Task?
+      let task: Task
     }
     
     struct ViewModel {

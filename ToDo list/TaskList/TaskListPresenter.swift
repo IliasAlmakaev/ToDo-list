@@ -25,7 +25,7 @@ final class TaskListPresenter: TaskListPresentaionLogic {
   }
   
   func presentTask(response: TaskList.ShowTask.Response) {
-    let taskCell = TaskCellViewModel(task: response.task ?? Task())
+    let taskCell = TaskCellViewModel(task: response.task)
     let viewModel = TaskList.ShowTask.ViewModel(taskCell: taskCell)
     viewController?.displayTask(viewModel: viewModel)
   }

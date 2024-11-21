@@ -27,8 +27,6 @@ class TaskListViewController: UIViewController {
   var interactor: TaskListBusinessLogic?
   var router: (NSObjectProtocol & TaskListRoutingLogic & TaskListDataPassing)?
   
-  private var tasks: [Task] = []
-  private let storageManager = StorageManager.shared
   private var rows: [TaskCellViewModelProtocol] = []
   
   override func viewDidLoad() {
@@ -45,17 +43,6 @@ class TaskListViewController: UIViewController {
         router.perform(selector, with: segue)
       }
     }
-    
-//    if segue.identifier == "TaskDetails" {
-//      guard let taskDetailsVC = segue.destination as? TaskDetailsViewController else { return }
-//      guard let indexPath = tableView.indexPathForSelectedRow else { return }
-//
-//      let task = tasks[indexPath.row]
-//      taskDetailsVC.task = task
-//    } else {
-//      guard let createTaskVC = segue.destination as? CreateTaskViewController else { return }
-//      createTaskVC.delegate = self
-//    }
   }
   
   private func showTasks() {
